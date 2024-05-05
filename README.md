@@ -20,12 +20,17 @@ Make sure that you have the following installed:
 
  `npm start`
 
- ### Go ahead a nd add a product (note that the price field only takes a numeric input)
+ ### Go ahead and add a product (note that the price field only takes a numeric input)
 
  ## Debugging 
  ## Install npm install --save source-map-explorer
  ##  Add "analyze": "source-map-explorer 'build/static/js/*.js'"  on package.json on the debug
    ##  `npm run build`
    ##  `npm run analyze`
+![Screenshot from 2024-05-05 23-10-18](https://github.com/mwaskagi/yolo/assets/53992099/332a016a-654b-4dea-940d-540a0222a810)
 
 ## When running npm start on ./backend make sure mongodb service is up
+
+## After building images from the docker file push them to docker hub
+
+
