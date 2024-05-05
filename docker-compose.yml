@@ -4,7 +4,7 @@ services:
     build: ./client
     image: yolo_app
     environment:
-      - MONGODB_URL=mongo://mongodb:27017/yolo
+      - MONGODB_URL=mongo://localhost/
     ports : 
       - "3000:3000"
     depends_on:

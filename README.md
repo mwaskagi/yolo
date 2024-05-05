@@ -22,5 +22,10 @@ Make sure that you have the following installed:
 
  ### Go ahead a nd add a product (note that the price field only takes a numeric input)
 
- ## Under Debugging on client.package.json added 
- ## "analyze": "source-map-explorer 'build/static/js/*.js'" to help bundle size analysis
+ ## Debugging 
+ ## Install npm install --save source-map-explorer
+ ##  Add "analyze": "source-map-explorer 'build/static/js/*.js'"  on package.json on the debug
+   ##  `npm run build`
+   ##  `npm run analyze`
+
+## When running npm start on ./backend make sure mongodb service is up
