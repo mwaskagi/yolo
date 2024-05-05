@@ -3,18 +3,16 @@ FROM node:16.13.0
 # set working directory
 WORKDIR /app
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-# install app dependencies
+# i#Copy package.json file in the node folder inside container
 COPY package.json ./
-COPY package-lock.json ./
+
+# Install the dependencies in the container
 RUN npm install
 
-# add app
+# Copy cdde to the container
 COPY . ./
 
-#EXPOSE
+#EXPOSE service over port 3000
 EXPOSE 3000
 
 # start app
