@@ -21,3 +21,6 @@ Make sure that you have the following installed:
  `npm start`
 
  ### Go ahead a nd add a product (note that the price field only takes a numeric input)
+
+ ## Under Debugging on client.package.json added 
+ ## "analyze": "source-map-explorer 'build/static/js/*.js'" to help bundle size analysis

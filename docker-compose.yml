@@ -1,0 +1,32 @@
+version: '3.4'        #Docker compose version
+services:
+  yolo_app:
+    build: ./client
+    image: yolo_app
+    environment:
+      - MONGODB_URL=mongo://mongodb:27017/yolo
+    ports : 
+      - "3000:3000"
+    depends_on:
+      - yolo-db
+    volumes:
+      - .:/src
+    networks:
+      - yolo-network
+
+  yolo-db:
+    build: ./backend
+    image : mongo:6-jammy
+    ports:
+      - "27017:27017"
+    volumes:
+      - dbdata6:/data/db
+    networks:
+      - yolo-network
+  
+volumes:
+  dbdata6:
+
+networks:
+  yolo-network:
+    driver: bridge
