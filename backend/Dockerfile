@@ -1,4 +1,5 @@
-FROM node:alpine
+# lite image
+FROM node:alpine  
 
 # set working directory
 WORKDIR /app
@@ -18,4 +19,4 @@ RUN npm install
 COPY . ./
 
 # start app
-CMD ["npm", "start"]
+CMD ["node", "server.js"]

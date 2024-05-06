@@ -1,4 +1,5 @@
-FROM node:16.13.0
+# Has a small image
+FROM node:16-alpine
 
 # set working directory
 WORKDIR /app

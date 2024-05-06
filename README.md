@@ -1,3 +1,10 @@
+# A Docker demonstation of orcharstration of a 3 containerised  architecture.
+- Frontend - web application
+- Backend - Interaction between DB and frontend
+- DB - Where data is stored.
+
+# For one to run this docker, simply type docker-compose up at the command prompt which will in turn create the MongoDB from stock mongo inage, backend api which use nodejs ith express built from node:alpine, and finaly the front-end which uses reachjs and built from node:alpine image
+
 # Requirements
 Make sure that you have the following installed:
 - [node](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04) 
