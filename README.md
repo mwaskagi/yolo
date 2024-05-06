@@ -1,9 +1,9 @@
-# A Docker demonstation of orcharstration of a 3 containerised  architecture.
+# A Docker demonstation of Orchestration of a 3 layered containerised architecture.
 - Frontend - web application
 - Backend - Interaction between DB and frontend
 - DB - Where data is stored.
 
-# For one to run this docker, simply type docker-compose up at the command prompt which will in turn create the MongoDB from stock mongo inage, backend api which use nodejs ith express built from node:alpine, and finaly the front-end which uses reachjs and built from node:alpine image
+For one to run this docker, simply type docker-compose up at the command prompt which will in turn create the MongoDB from stock mongo inage, backend api which use nodejs ith express built from node:alpine, and finaly the front-end which uses reachjs and built from node:alpine image
 
 # Requirements
 Make sure that you have the following installed:
