@@ -1,4 +1,27 @@
-# A Docker demonstation of Orchestration of a 3 layered containerised architecture.
+# A Docker Micor Service demonstation.
+This involves all a well simple designed system that uses the basic fundamental of docker containerisation with the below 
+- Docker Networks
+- Container Orcharstration
+- Docker Compose
+- Debugging Container
+- intergration and testing
+
+ # Docker Networks
+ Helps in managing communication between the containers, host machine and external network
+
+ # Container Orcharstration 
+ This is the automation of the operational tasks required to run containerized services and workloads
+
+ # Docker Compose
+ Allows one to define and manage multi-container application using a single YAML file (Container Orcharstration)
+
+ #  Debugging Container
+ Will give you the skills to debug code
+
+ # intergration and testing
+ Will be able to integrate with others os and do testing
+
+ The main application will contain the below
 - Frontend - web application
 - Backend - Interaction between DB and frontend
 - DB - Where data is stored.
