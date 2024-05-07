@@ -1,11 +1,11 @@
 # Has a small image
-FROM node:16-alpine
+FROM node:10-slim
 
 # set working directory
 WORKDIR /app
 
 # i#Copy package.json file in the node folder inside container
-COPY package.json ./
+COPY package*.json ./
 
 # Install the dependencies in the container
 RUN npm install
