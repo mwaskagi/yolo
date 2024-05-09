@@ -15,9 +15,9 @@ services:
     container_name: yolo_backend
     build: ./backend
     environment:
-      MONGODB_URI: mongodb://yolo_db:27017/yolomy
+      MONGODB_URI: mongodb://yolo_db:27017/
     ports:
-      - 4000:4000
+      - 5000:5000
     depends_on:
       - yolo_db
     networks:
@@ -30,10 +30,7 @@ services:
     ports:
       - '27017:27017'
     volumes:
-      - mongo_data:/home/devops05/data/yolo
-    environment: 
-      MONGODB_INITDB_ROOT_USERNAME: username
-      MONGODB_INITDB_ROOT_PASSWORD: password
+      - mongo_data:/data/db
     networks:
       - yolo_network
 

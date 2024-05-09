@@ -16,7 +16,9 @@ COPY upload.js ./
 RUN npm install
 
 # add app
-COPY . ./
+COPY . .
 
+#expose port
+EXPOSE 5000
 # start app
 CMD ["node", "server.js"]
