@@ -1,4 +1,4 @@
-# A Docker Micor Service demonstation.
+# A Docker Micro Service demonstation.
 This involves all a well simple designed system that uses the basic fundamental of docker containerisation with the below 
 - Docker Networks
 - Container Orcharstration
@@ -59,10 +59,14 @@ Make sure that you have the following installed:
    ##  `npm run analyze`
 
 ## When running npm start on ./backend make sure mongodb service is up
+![Screenshot from 2024-05-09 08-35-14](https://github.com/mwaskagi/yolo/assets/53992099/e749826c-85b1-49d6-9d1c-dbf669b0f687)
+
 
 ## After building images from the docker file push them to docker hub
+![Screenshot from 2024-05-09 08-39-22](https://github.com/mwaskagi/yolo/assets/53992099/3ee532b0-5fc4-4923-8509-c1156535bbcb)
+![Screenshot from 2024-05-09 08-39-22](https://github.com/mwaskagi/yolo/assets/53992099/0766c50a-b8d7-406a-b172-708637ddc7d4)
 
-![Screenshot from 2024-05-05 23-10-18](https://github.com/mwaskagi/yolo/assets/53992099/332a016a-654b-4dea-940d-540a0222a810)
+
 
 
 
