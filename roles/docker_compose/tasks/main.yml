@@ -28,53 +28,74 @@
     name: docker
     state: present
 
-- name: Create Docker network
-  community.docker.docker_network:
-    name: "{{ yolo_network }}"
-    driver: bridge
+- name: Install Docker Compose
+  apt:
+    name: docker-compose
+    state: present
 
-- name: Create a Docker volume for MongoDB data
-  community.docker.docker_volume:
-    name: "{{ mongo_data_volume }}"
-
-- name: Build and start yolo_db container
-  community.docker.docker_container:
-    name: yolo_db
-    image: "{{ mongo_image }}"
-    ports:
-      - "27017:27017"
-    volumes:
-      - "{{ mongo_data_volume }}:/data/db"
-    networks:
-      - name: "{{ yolo_network }}"
+- name: Ensure Docker service is running
+  service:
+    name: docker
     state: started
-    restart_policy: always
+    enabled: yes
 
-- name: Build and start yolo_backend container
-  community.docker.docker_container:
-    name: yolo_backend
-    build:
-      path: ./backend
-    environment:
-      MONGODB_URI: "{{ mongodb_uri }}"
-    ports:
-      - "5000:5000"
-    depends_on:
-      - yolo_db
-    networks:
-      - name: "{{ yolo_network }}"
-    state: started
+- name: Copy docker-compose.yml to the VM
+  copy:
+    src: /home/kagi/devops05/yolo/docker-compose.yml
+    dest: /home/vagrant/docker-compose.yml
 
-- name: Build and start yolo_app container
-  community.docker.docker_container:
-    name: yolo_app
-    build:
-      path: ./client
-    ports:
-      - "3000:3000"
-    depends_on:
-      - yolo_backend
-    networks:
-      - name: "{{ yolo_network }}"
-    tty: true
-    state: started
+- name: Run docker-compose up
+  command: docker-compose up -d
+  args:
+   chdir: /home/vagrant
+  
+# - name: Create Docker network
+#   community.docker.docker_network:
+#     name: "{{ yolo_network }}"
+#     driver: bridge
+
+# - name: Create a Docker volume for MongoDB data
+#   community.docker.docker_volume:
+#     name: "{{ mongo_data_volume }}"
+
+# - name: Build and start yolo_db container
+#   community.docker.docker_container:
+#     name: yolo_db
+#     image: "{{ mongo_image }}"
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - "{{ mongo_data_volume }}:/data/db"
+#     networks:
+#       - name: "{{ yolo_network }}"
+#     state: started
+#     restart_policy: always
+
+# - name: Build and start yolo_backend container
+#   community.docker.docker_container:
+#     name: yolo_backend
+#     build:
+#       path: ./backend
+#     environment:
+#       MONGODB_URI: "{{ mongodb_uri }}"
+#     ports:
+#       - "5000:5000"
+#     depends_on:
+#       - yolo_db
+#     networks:
+#       - name: "{{ yolo_network }}"
+#     state: started
+
+# - name: Build and start yolo_app container
+#   community.docker.docker_container:
+#     name: yolo_app
+#     build:
+#       path: ./client
+#     ports:
+#       - "3000:3000"
+#     depends_on:
+#       - yolo_backend
+#     networks:
+#       - name: "{{ yolo_network }}"
+#     tty: true
+#     state: started
