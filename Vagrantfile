@@ -1,5 +1,6 @@
 Vagrant.configure("2") do |config|
 
+  
   config.vm.define "yolo" do |yolo|
     config.vm.box = "ubuntu/jammy64"
     yolo.vm.network "private_network", ip: "192.168.56.11"

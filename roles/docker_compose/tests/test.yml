@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - docker_backend
+    - docker_compose

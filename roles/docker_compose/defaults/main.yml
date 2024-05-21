@@ -1,0 +1,9 @@
+---
+# defaults file for docker_compose
+yolo_app_image: "client"
+yolo_backend_image: "backend"
+mongo_image: "mongo:latest"
+mongo_data_volume: "mongo_data"
+mongodb_uri: "mongodb://yolo_db:27017/"
+yolo_network: "yolo_network"
+
