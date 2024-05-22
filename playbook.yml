@@ -1,12 +1,62 @@
-- name: Deploy YOLO application stack
-  hosts: all
-  become: true
-  roles:
-    - role: docker_compose
-      vars:
-        yolo_app_image: "client"
-        yolo_backend_image: "backend"
-        mongo_image: "mongo:latest"
-        mongo_data_volume: "mongo_data"
-        mongodb_uri: "mongodb://yolo_db:27017/"
-        yolo_network: "yolo_network"
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Update apt cache and install dependencies
+      apt:
+        update_cache: yes
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Install Docker and Docker Compose
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+
+    # - name: Install Docker Compose
+    #   get_url:
+    #     url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-linux
+    #     dest: /usr/local/bin/docker-compose
+    #     mode: '0755'
+
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Clone GitHub repository
+      git:
+        repo: 'https://github.com/mwaskagi/yolo.git'
+        dest: /vagrant/app
+
+    - name: Change permissions for cloned repo
+      file:
+        path: /vagrant/app
+        state: directory
+        owner: vagrant
+        group: vagrant
+        mode: '0755'
+        recurse: yes
+
+    - name: Build and run Docker Compose
+      shell: docker-compose up -d
+      args:
+        chdir: /vagrant/app
