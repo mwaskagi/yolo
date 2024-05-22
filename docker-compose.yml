@@ -1,4 +1,4 @@
-version: '3.4'        #Docker compose version
+version: '3.4'
 services:
   yolo_app:
     container_name: yolo_app
@@ -9,7 +9,7 @@ services:
       - '3000:3000'
     networks:
       - yolo_network
-    tty: true         # Allow app to run in the backgroud
+    tty: true 
     
   yolo_backend:
     container_name: yolo_backend
