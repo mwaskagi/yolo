@@ -1,4 +1,12 @@
----
+databases:
+  - name: yolo_db
+    env: docker
+    plan: starter
+    dockerfilePath: ./db/Dockerfile
+    envVars:
+      - key: PORT
+        value: 27017
+
 services:
   - type: web
     name: yolo_app
@@ -20,11 +28,3 @@ services:
       - key: MONGODB_URI
         value: mongodb://yolo_db:27017/
     healthCheckPath: /
-  databases:
-    - name: yolo_db
-     env: docker
-     plan: starter
-     dockerfilePath: ./db/Dockerfile
-     envVars:
-       - key: PORT
-         value: 27017
