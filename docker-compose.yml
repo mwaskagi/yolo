@@ -1,5 +1,31 @@
 version: '3.4'
 services:
+  yolo_db:
+    container_name: yolo_db
+    image : mongo:jammy
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./mongo_data:/data/db
+    networks:
+      - yolo_network
+
+  yolo_backend:
+    container_name: yolo_backend
+    build: ./backend
+    environment:
+      MONGODB_URI: mongodb://yolo_db:27017/yolomy
+    ports:
+      - 5000:5000
+    depends_on:
+      - yolo_db
+    networks:
+      - yolo_network
+    volumes:
+      - ./backend:/app/backend/
+
+
   yolo_app:
     container_name: yolo_app
     build: ./client
@@ -9,34 +35,15 @@ services:
       - '3000:3000'
     networks:
       - yolo_network
-    tty: true 
-    
-  yolo_backend:
-    container_name: yolo_backend
-    build: ./backend
-    environment:
-      MONGODB_URI: mongodb://yolo_db:27017/
-    ports:
-      - 5000:5000
-    depends_on:
-      - yolo_db
-    networks:
-      - yolo_network  
-
-  yolo_db:
-    container_name: yolo_db
-    image : mongo:latest
-    restart: always
-    ports:
-      - '27017:27017'
     volumes:
-      - mongo_data:/data/db
-    networks:
-      - yolo_network
-
+      - ./client:/app/client/
+    
 volumes:
   mongo_data:
+  backend:
+  client:
 
 networks:
   yolo_network:
+    name: yolo_network
     driver: bridge
