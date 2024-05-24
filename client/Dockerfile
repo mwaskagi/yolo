@@ -1,7 +1,8 @@
 # Has a small image
 FROM node:16-alpine
 
-LABEL maintainer="James Mwangi <gituiku.mwangi@gmail.com>"
+# Label
+LABEL maintainer="Simon Okello<gituiku.mwangi@gmail.com>"
 
 # set working directory
 WORKDIR /app
