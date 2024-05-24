@@ -8,7 +8,6 @@ services:
       - key: PORT
         value: 3000
     healthCheckPath: /
-
   - type: web
     name: yolo_backend
     env: docker
@@ -20,12 +19,11 @@ services:
       - key: MONGODB_URI
         value: mongodb://yolo_db:27017/
     healthCheckPath: /
-
-  - type: privateService
-    name: yolo_db
-    env: docker
-    plan: starter
-    dockerfilePath: ./db/Dockerfile
-    envVars:
-      - key: PORT
-        value: 27017
+  databases:
+    - name: yolo_db
+     env: docker
+     plan: starter
+     dockerfilePath: ./db/Dockerfile
+     envVars:
+       - key: PORT
+         value: 27017
