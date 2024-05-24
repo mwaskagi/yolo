@@ -1,5 +1,7 @@
 # Has a small image
-FROM node:10-slim
+FROM node:16-alpine
+
+LABEL maintainer="James Mwangi <gituiku.mwangi@gmail.com>"
 
 # set working directory
 WORKDIR /app
@@ -11,7 +13,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copy cdde to the container
-COPY . ./
+COPY . .
 
 #EXPOSE service over port 3000
 EXPOSE 3000

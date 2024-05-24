@@ -1,17 +1,14 @@
 # lite image
-FROM node:alpine  
+FROM node:16-alpine  
+
+LABEL maintainer="James Mwangi <gituiku.mwangi@gmail.com>"
 
 # set working directory
 WORKDIR /app
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
 # install app dependencies
 COPY package.json ./
-COPY package-lock.json ./
-COPY server.js ./
-COPY upload.js ./
+
 
 RUN npm install
 
@@ -21,4 +18,4 @@ COPY . .
 #expose port
 EXPOSE 5000
 # start app
-CMD ["node", "server.js"]
+CMD ["node", "start"]
