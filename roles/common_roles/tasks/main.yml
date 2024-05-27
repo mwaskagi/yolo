@@ -1,0 +1,12 @@
+---
+# tasks file for common_roles
+- name: Update apt cache and install dependencies
+  apt:
+    update_cache: yes
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: present
+

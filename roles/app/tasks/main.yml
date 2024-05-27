@@ -1,0 +1,16 @@
+---
+# tasks file for app
+- name: Clone GitHub repository
+  git:
+    repo: 'https://github.com/mwaskagi/yolo.git'
+    dest: /vagrant/app
+    force: yes
+
+- name: Change permissions for cloned repo
+  file:
+    path: /vagrant/app
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: '0755'
+    recurse: yes
