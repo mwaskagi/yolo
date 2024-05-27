@@ -1,6 +1,103 @@
 ---
 # tasks file for docker_compose
-- name: Build and run Docker Compose
-  shell: docker-compose up -d
-  args:
-    chdir: /vagrant/app
+- name: Clone yolo
+  git:
+    repo: '{{app_repo}}'
+    dest: '{{playbook_dir}}'
+    single_branch: true
+    version: '{{branch_name}}'
+    update: true
+  tags:
+    - clone
+
+- name: Change permissions for cloned repo
+  file:
+    path: /vagrant/app
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: '0755'
+    recurse: yes
+
+- name: Create Bridge Network
+  docker_network:
+    name: '{{app_network_name}}'
+    state: present
+    attachable: true
+  tags:
+    - networking
+
+- name: Create  Container
+  docker_container:
+    name: '{{data_container_name}}'
+    image: busybox
+    state: started
+    tty: true
+    volumes:
+      - /data # Mount an empty volume to /data in the busybox container
+
+  tags:
+    - storage
+
+- name: Run MongoDB Container
+  docker_container:
+    name: yolo-database-container
+    image: mongo:jammy
+    state: started
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./mongo-data:/data/db
+    networks:
+      - name: yolo_network
+  tags:
+    - database
+    - backend
+
+- block:
+    - name: Run yolo backend docker container
+      docker_container:
+        name: '{{backend_container_name}}'
+        image: '{{backend_image_name}}'
+        state: started
+        volumes_from:
+          - '{{data_container_name}}'
+        ports:
+          - '{{backend_port}}'
+        networks:
+          - name: yolo_network
+        env:
+          MONGO_URI: '{{db_url}}'
+      tags:
+        - backend
+
+  when: ansible_os_family == 'Debian'
+  rescue:
+    - name: Handle error during backend dockerization setup
+      debug:
+        msg: 'Backend dockerization setup failed. Please check the logs.'
+
+- block:
+    - name: Run yolo client docker container
+      docker_container:
+        name: '{{client_container_name}}'
+        image: '{{client_image_name}}'
+        state: started
+        volumes_from:
+          - '{{data_container_name}}'
+        ports:
+          - '{{frontend_port}}'
+        networks:
+          - name: yolo_network
+        network_mode: bridge
+        env:
+          CHOKIDAR_USEPOLLING: 'true'
+          stdin_open: 'true'
+        tty: true
+      tags:
+        - frontend
+  when: ansible_os_family == 'Debian'
+  rescue:
+    - name: Handle error during client dockerization setup
+      debug:
+        msg: 'Client dockerization setup failed. Please check the logs.'
