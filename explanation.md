@@ -33,11 +33,16 @@
   - Maps mongo db deployment and a volume.
 
 - Configs
- - Step 1 - setup default computer zone
+ - Setup project 
+  ```
+    gcloud config set project [PROJECT_ID]
+  ```
+ 
+ - Setup default computer zone and location
   - contains the region location on where the cluster will operate by setting up the default region and default zone
     ```
      gcloud config set compute/region us-central1
-     gcloud config set compute/us-central1-a
+     gcloud config set compute/zone us-central1-a
     ```
 -  After setting up Googleregion and zone,create a kubernetes cluster on GKE
     ```
