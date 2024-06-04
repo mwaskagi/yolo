@@ -2,7 +2,7 @@
 FROM node:16-alpine
 
 # Label
-LABEL maintainer="Simon Okello<gituiku.mwangi@gmail.com>"
+LABEL maintainer="James Mwangi <gituiku.mwangi@gmail.com>"
 
 # set working directory
 WORKDIR /app
