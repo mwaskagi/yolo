@@ -54,7 +54,14 @@
     gcloud container clusters get-credentials yolo-cluster --zone us-central1-a
     ```
 - Cloned the yolo repo
+    ```
+     git clone https://github.com/mwaskagi/yolo.git
+    ```
 - Applied the deployment files using kubectl.
     ```
-    kubectl apply -f k8_manifests
+    kubectl apply -f yolo/k8_manifest
     ```
+- Start service
+  ```
+    kubectl get service client-service
+  ```
